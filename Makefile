@@ -10,3 +10,11 @@ ip:
 	kubectl describe pod | grep IP:
 curl:
 	curl http://${ip}:9000/guid ; echo # ip parameter should be exported
+tokens:
+	kubectl -n kube-system get secret #https://github.com/kubernetes/dashboard/wiki/Access-control
+token:
+	kubectl -n kube-system describe secret ${token_name}
+# another way of getting token: https://github.com/kubernetes/dashboard/issues/2474#issuecomment-348811806
+
+nodes:
+	kubectl get nodes
