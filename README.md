@@ -70,3 +70,9 @@ it has kube dns pending:
 ```
 kube-system   kube-dns-86f4d74b45-x2nf4   0/3       Pending   0          4m
 ```
+
+This `Not ready` status is [solved](https://stackoverflow.com/a/44113181/1024794) by setting a Network Overlay:
+```
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml 
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+```
