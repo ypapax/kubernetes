@@ -18,3 +18,7 @@ token:
 
 nodes:
 	kubectl get nodes
+allpods:
+	kubectl get pods --all-namespaces
+log:
+	journalctl -xn -u kubelet | less

@@ -28,7 +28,7 @@ b         NotReady   master    10m       v1.10.0
 ```
 checking [logs](https://stackoverflow.com/a/44652403/1024794):
 ```
-journalctl -u kubelet
+journalctl -xn -u kubelet | less
 ```
 and see:
 ```
@@ -76,3 +76,38 @@ This `Not ready` status is [solved](https://stackoverflow.com/a/44113181/1024794
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml 
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
 ```
+
+### Status is not running for several pods:
+```
+kubectl get pods --all-namespaces
+NAMESPACE     NAME                          READY     STATUS              RESTARTS   AGE
+kube-system   etcd-np3                      1/1       Running             0          10h
+kube-system   kube-apiserver-np3            1/1       Running             0          10h
+kube-system   kube-controller-manager-np3   1/1       Running             0          10h
+kube-system   kube-dns-86f4d74b45-xc9f8     0/3       ContainerCreating   0          10h
+kube-system   kube-flannel-ds-j9vdm         0/1       CrashLoopBackOff    42         9h
+kube-system   kube-flannel-ds-nclm7         0/1       CrashLoopBackOff    54         10h
+kube-system   kube-flannel-ds-t5qjh         0/1       CrashLoopBackOff    47         10h
+kube-system   kube-proxy-4z466              1/1       Running             0          10h
+kube-system   kube-proxy-8rccx              1/1       Running             2          10h
+kube-system   kube-proxy-hqtzs              1/1       Running             0          9h
+kube-system   kube-scheduler-np3            1/1       Running             0          10h
+```
+ContainerCreating and CrashLoopBackOff:
+
+```
+kube-system   kube-dns-86f4d74b45-xc9f8     0/3       ContainerCreating   0          10h
+kube-system   kube-flannel-ds-j9vdm         0/1       CrashLoopBackOff    42         9h
+kube-system   kube-flannel-ds-nclm7         0/1       CrashLoopBackOff    54         10h
+kube-system   kube-flannel-ds-t5qjh         0/1       CrashLoopBackOff    47         10h
+```
+Let's [debug](https://serverfault.com/a/730746/157584) it:
+```
+ kubectl describe pods
+ ```
+ shows nothing.
+```
+kubectl describe po kube-dns-86f4d74b45-xc9f8
+```
+Gives:
+	Error from server (NotFound): pods "kube-dns-86f4d74b45-xc9f8" not found
