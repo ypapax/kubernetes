@@ -116,4 +116,22 @@ kubectl describe po kube-dns-86f4d74b45-xc9f8
 ```
 Gives:
 	Error from server (NotFound): pods "kube-dns-86f4d74b45-xc9f8" not found
-	
+
+#### solution
+This issue is fixed by adding `--pod-network-cidr 10.244.0.0/16` flag:
+```
+sudo kubeadm init --pod-network-cidr 10.244.0.0/16
+```
+Now they are all running:
+```
+kubectl get pods --all-namespaces                                                                                                                                       Wed Apr 11 15:16:05 2018
+
+NAMESPACE     NAME                          READY     STATUS    RESTARTS   AGE
+kube-system   etcd-np3                      1/1       Running   0          1m
+kube-system   kube-apiserver-np3            1/1       Running   0          1m
+kube-system   kube-controller-manager-np3   1/1       Running   0          1m
+kube-system   kube-dns-86f4d74b45-p46zs     3/3       Running   0          2m
+kube-system   kube-flannel-ds-gt2gx         1/1       Running   0          2m
+kube-system   kube-proxy-5clcw              1/1       Running   0          2m
+kube-system   kube-scheduler-np3            1/1       Running   0          1m
+```
