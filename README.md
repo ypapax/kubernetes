@@ -9,6 +9,11 @@ https://blog.alexellis.io/kubernetes-in-10-minutes/
 
 https://www.youtube.com/watch?v=b_fOIELGMDY
 
+### Installing [dependencies](https://blog.alexellis.io/kubernetes-in-10-minutes/)
+```
+curl -sL https://gist.githubusercontent.com/alexellis/7315e75635623667c32199368aa11e95/raw/b025dfb91b43ea9309ce6ed67e24790ba65d7b67/kube.sh | sudo sh
+```
+
 ## Issues
 ### unable to get nodes
 Had error
@@ -111,3 +116,4 @@ kubectl describe po kube-dns-86f4d74b45-xc9f8
 ```
 Gives:
 	Error from server (NotFound): pods "kube-dns-86f4d74b45-xc9f8" not found
+	
