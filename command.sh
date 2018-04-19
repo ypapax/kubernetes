@@ -30,6 +30,13 @@ po(){
 }
 
 
+deletePodByName(){
+	podName=$1
+	kubectl delete pods $podName --grace-period=0 --force
+}
 
+allowPodsOnMaster(){
+	kubectl taint nodes --all node-role.kubernetes.io/master-
+}
 
 $@
