@@ -3,7 +3,7 @@ set -ex
 sudo kubeadm reset
 sudo rm -rf $HOME/.kube # https://github.com/kubernetes/kubernetes/issues/48378#issuecomment-374412266
 
-sudo kubeadm init --pod-network-cidr 10.244.0.0/16  | tee /tmp/join
+sudo kubeadm init --pod-network-cidr 10.244.0.0/16  | tee ~/join
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config

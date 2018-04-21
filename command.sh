@@ -39,4 +39,9 @@ allowPodsOnMaster(){
 	kubectl taint nodes --all node-role.kubernetes.io/master-
 }
 
+podssh(){
+	podName=$1
+	kubectl exec -ti $podName /bin/bash
+}
+
 $@
