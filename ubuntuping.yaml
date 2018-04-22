@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntuping
+spec:
+  containers:
+  - name: ubuntuping
+    image: adiazmor/docker-ubuntu-with-ping
+    # Just spin & wait forever
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
