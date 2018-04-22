@@ -22,6 +22,8 @@ docker_ubuntu(){
 	docker run -it ubuntu
 }
 
-
+start(){
+	kubectl create -f ubuntu.yaml
+}
 
 $@
